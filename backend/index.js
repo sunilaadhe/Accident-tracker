@@ -14,8 +14,11 @@ const app = express();
  ConnectMongoDb();
  
 app.use(cors({
-  origin: "http://localhost:5173",
-  credentials: true,
+  origin: ["http://localhost:5173",
+  "https://accident-tracker-psv8.vercel.app",
+  ],
+    credentials: true,
+
 }));
 
  app.use(cookieParser());
@@ -29,8 +32,12 @@ app.get("/health",(req,res)=>{
     res.send("health is ok!")
 })
 app.use(cors({
-  origin: "http://localhost:5173",
-  credentials: true,
+  origin: ["http://localhost:5173",
+     "https://accident-tracker-psv8.vercel.app",
+
+  ],
+    credentials: true,
+
 }));
 
 

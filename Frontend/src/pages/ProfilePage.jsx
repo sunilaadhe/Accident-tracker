@@ -14,7 +14,7 @@ function ProfilePage() {
   try {
 
     const res = await fetch(
-      `http://localhost:4040/api/user/update/${user._id}`,
+      `https://accident-tracker-1.onrender.com/api/user/update/${user._id}`,
       {
         method: "PUT",
         headers: {

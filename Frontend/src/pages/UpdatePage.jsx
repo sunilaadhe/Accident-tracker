@@ -22,7 +22,7 @@ function UpdatePage() {
     try {
 
       const res = await fetch(
-        `http://localhost:4040/api/accident/${id}`
+        `https://accident-tracker-1.onrender.com/api/accident/${id}`
       );
 
       const data = await res.json();
@@ -66,7 +66,7 @@ const updateAccident = async (e) => {
   try {
 
     const res = await fetch(
-      `http://localhost:4040/api/accident/update/${id}`,
+      `https://accident-tracker-1.onrender.com/api/accident/update/${id}`,
       {
         method: "PUT",
 

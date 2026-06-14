@@ -16,7 +16,7 @@ export default function ReportPage() {
     try {
 
       const res = await fetch(
-        "http://localhost:4040/api/accident/create",
+        "https://accident-tracker-1.onrender.com/api/accident/create",
         {
           method: "POST",
 

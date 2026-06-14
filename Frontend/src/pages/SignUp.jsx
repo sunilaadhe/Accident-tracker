@@ -12,7 +12,7 @@ export const SignUpPage = () => {
 const onSubmitSignUp = async (e) => {
   try {
      e.preventDefault();
-      const res = await fetch("http://localhost:4040/api/user/signup", {
+      const res = await fetch("https://accident-tracker-1.onrender.com/api/user/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({name, email,password}),

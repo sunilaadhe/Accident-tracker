@@ -12,7 +12,7 @@ export default function DashboardPage() {
     try {
 
       const res = await fetch(
-        "http://localhost:4040/api/accident/all",
+        "https://accident-tracker-1.onrender.com/api/accident/all",
       );
 
       const data = await res.json();
@@ -40,7 +40,7 @@ export default function DashboardPage() {
     try {
 
       const res = await fetch(
-        `http://localhost:4040/api/accident/delete/${id}`,
+        `https://accident-tracker-1.onrender.com/api/accident/delete/${id}`,
         {
           method: "DELETE",
           credentials: "include",

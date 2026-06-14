@@ -12,7 +12,7 @@ export const Navbar = () => {
     try {
 
       const res = await fetch(
-        "http://localhost:4040/api/user/logout",
+        "https://accident-tracker-1.onrender.com/api/user/logout",
         {
           credentials: "include",
         }

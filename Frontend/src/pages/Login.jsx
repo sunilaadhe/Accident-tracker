@@ -16,7 +16,7 @@ export const LoginPage = () => {
     try {
 
       const res = await fetch(
-        "http://localhost:4040/api/user/signin",
+        "https://accident-tracker-1.onrender.com/api/user/signin",
         {
           method: "POST",
           headers: {

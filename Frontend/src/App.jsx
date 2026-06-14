@@ -1,7 +1,7 @@
 import {Route, BrowserRouter as Router, Routes} from "react-router-dom"
-import { LoginPage } from "./Pages/Login"
+import { LoginPage } from "./pages/Login"
 import { Navbar } from "./components/Navbar"
-import { SignUpPage } from "./Pages/SignUp"
+import { SignUpPage } from "./pages/SignUp"
 import  AboutPage  from "./pages/Aboutpage"
 import  HomePage  from "./pages/HomePage";
 import ReportPage from "./pages/ReportPage";

@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-export const Navbar = () => {
+const Navbar = () => {
 
   const navigate = useNavigate();
 
@@ -101,3 +101,5 @@ export const Navbar = () => {
     </header>
   );
 };
+
+export default Navbar

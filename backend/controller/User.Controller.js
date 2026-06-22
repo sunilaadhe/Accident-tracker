@@ -50,17 +50,17 @@ export const SigniIn = async (req,res)=>{
     }
 
     const token = jwt.sign({_id:isUserExist._id},process.env.JWT_SECRET_KEY);
-
-     return res.cookie("token",token,{
-      httpOnly:true,
-      maxAge:24 * 60 * 60 * 1000,
-      sameSite:"lax",
-
-     }).status(200).json({
-       success:true,
-       message:"User login successfully",
-       user:isUserExist
-     })
+ 
+    return res.cookie("token", token, {
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000,
+      sameSite: "none",
+      secure: true,
+      }).status(200).json({
+      success: true,
+      message: "User login successfully",
+      user: isUserExist
+});
 
 }
 

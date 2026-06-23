@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const LoginPage = () => {
+  const BACKEND_URL= import.meta.env.VITE_API_URL
 
   const navigate = useNavigate();
 
@@ -16,13 +17,13 @@ const LoginPage = () => {
     try {
 
       const res = await fetch(
-        "https://accident-tracker-1.onrender.com/api/user/signin",
+        `${BACKEND_URL}/api/user/signin`,
         {
           method: "POST",
+          credentials:"include",
           headers: {
             "Content-Type": "application/json",
           },
-          credentials:"include",
           body: JSON.stringify({
             email,
             password,
@@ -38,11 +39,12 @@ const LoginPage = () => {
        "user",
        JSON.stringify(data.user)
    );
-
-     toast.success(data.message);
-
+    if(data.success === true){
+      toast.success(data.message);
       navigate("/");
-
+    } else {
+      toast.success(data.message);
+    }
 }
 
     } catch (error) {

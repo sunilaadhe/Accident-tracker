@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const Navbar = () => {
+  const BACKEND_URL= import.meta.env.VITE_API_URL
 
   const navigate = useNavigate();
 
@@ -12,7 +13,7 @@ const Navbar = () => {
     try {
 
       const res = await fetch(
-        "https://accident-tracker-1.onrender.com/api/user/logout",
+        `${BACKEND_URL}/api/user/logout`,
         {
           credentials: "include",
         }

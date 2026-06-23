@@ -3,6 +3,7 @@ import { useState } from "react";
 
 
 function ProfilePage() {
+  const BACKEND_URL= import.meta.env.VITE_API_URL
 
    const user = JSON.parse(localStorage.getItem("user"));
    const [name, setName] = useState(user?.name || "");
@@ -14,13 +15,13 @@ function ProfilePage() {
   try {
 
     const res = await fetch(
-      `https://accident-tracker-1.onrender.com/api/user/update/${user._id}`,
+      `${BACKEND_URL}/api/user/update/${user._id}`,
       {
         method: "PUT",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include",
         body: JSON.stringify({
           name,
           email,

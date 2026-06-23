@@ -2,6 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function ReportPage() {
+  const BACKEND_URL= import.meta.env.VITE_API_URL
 
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
@@ -16,15 +17,15 @@ export default function ReportPage() {
     try {
 
       const res = await fetch(
-        "https://accident-tracker-1.onrender.com/api/accident/create",
+        `${BACKEND_URL}/api/accident/create`,
         {
           method: "POST",
+          credentials: "include",
 
           headers: {
             "Content-Type": "application/json",
           },
 
-          credentials: "include",
 
           body: JSON.stringify({
             title,

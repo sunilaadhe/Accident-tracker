@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 export default function DashboardPage() {
+  const BACKEND_URL= import.meta.env.VITE_API_URL
 
   const [accidents, setAccidents] = useState([]);
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ export default function DashboardPage() {
     try {
 
       const res = await fetch(
-        "https://accident-tracker-1.onrender.com/api/accident/all",
+        `${BACKEND_URL}/api/accident/all`,
       );
 
       const data = await res.json();
@@ -40,10 +41,13 @@ export default function DashboardPage() {
     try {
 
       const res = await fetch(
-        `https://accident-tracker-1.onrender.com/api/accident/delete/${id}`,
+        `${BACKEND_URL}/api/accident/delete/${id}`,
         {
           method: "DELETE",
           credentials: "include",
+          headers: {
+            "Content-Type" : "application/json"
+          }
         }
       );
 
@@ -73,8 +77,6 @@ export default function DashboardPage() {
 
   // useEffect
   useEffect(() => {
-  console.log("Dashboard Loaded");
-
       fetchAccidents();
 
 

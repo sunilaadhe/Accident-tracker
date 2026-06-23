@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 function UpdatePage() {
+  const BACKEND_URL= import.meta.env.VITE_API_URL
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ function UpdatePage() {
     try {
 
       const res = await fetch(
-        `https://accident-tracker-1.onrender.com/api/accident/${id}`
+        `${BACKEND_URL}/api/accident/${id}`
       );
 
       const data = await res.json();

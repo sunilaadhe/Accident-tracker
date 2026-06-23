@@ -134,13 +134,13 @@ console.log(data);
             ></textarea>
 
           </div>
-
-          {/* Image URL
+{/* 
+          Image URL
           <div>
 
             <label className="block mb-2 font-semibold text-gray-700">
               Image 
-            </label> */}
+            </label>
 
             <input
               type="text"
@@ -150,7 +150,7 @@ console.log(data);
               className="w-full border border-gray-300 rounded-xl p-3 outline-none focus:ring-2 focus:ring-red-500"
             />
 
-          </div>
+          </div> */}
 
           {/* Severity */}
           <div>

@@ -139,7 +139,7 @@ console.log(data);
           <div>
 
             <label className="block mb-2 font-semibold text-gray-700">
-              Image URL
+              Image 
             </label>
 
             <input

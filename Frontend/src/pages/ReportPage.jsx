@@ -135,12 +135,12 @@ console.log(data);
 
           </div>
 
-          {/* Image URL */}
+          {/* Image URL
           <div>
 
             <label className="block mb-2 font-semibold text-gray-700">
               Image 
-            </label>
+            </label> */}
 
             <input
               type="text"

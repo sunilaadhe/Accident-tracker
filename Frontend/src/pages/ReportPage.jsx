@@ -142,7 +142,7 @@ console.log(data);
               Image 
             </label>
 
-            <input
+            <//input
               type="text"
               placeholder="Paste image URL"
               value={image}

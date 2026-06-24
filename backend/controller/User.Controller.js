@@ -16,10 +16,12 @@ export const SignUp = async(req,res)=>{
 
       const bcryptjspasswod = await hashSync(password,10)
 
-      const NewUser = await User.create({
-        email,name,password:bcryptjspasswod
-      })
-
+       const NewUser = await User.create({
+         email,
+         name,
+         password:bcryptjspasswod,
+         avatar:"https://i.pravatar.cc/150?img=3"
+        })
       return res.status(201).json({
         success:true,
         message:" User created succefully ",

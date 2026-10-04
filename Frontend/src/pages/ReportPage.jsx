@@ -10,6 +10,21 @@ export default function ReportPage() {
   const [image, setImage] = useState("");
   const [severity, setSeverity] = useState("Low");
 
+  const getCurrentLocation = () => {
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      setLocation(
+        `${position.coords.latitude}, ${position.coords.longitude}`
+      );
+    },
+    (error) => {
+      console.log(error);
+      toast.error("Unable to get location");
+    }
+  );
+};
+
+
   const submitReport = async (e) => {
 
     e.preventDefault();
@@ -114,6 +129,14 @@ console.log(data);
               required
               className="w-full border border-gray-300 rounded-xl p-3 outline-none focus:ring-2 focus:ring-red-500"
             />
+
+               <button
+                  type="button"
+                   onClick={getCurrentLocation}
+                   className="mt-2 bg-green-600 text-white px-4 py-2 rounded"
+                 >
+                 Use My Current Location
+              </button>
 
           </div>
 

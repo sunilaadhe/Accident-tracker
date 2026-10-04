@@ -6,12 +6,10 @@ const Navbar = () => {
 
   const navigate = useNavigate();
 
-  const user = localStorage.getItem("user");
-
+const user = JSON.parse(localStorage.getItem("user"));
+console.log(user);
   const logoutHandler = async () => {
-
     try {
-
       const res = await fetch(
         `${BACKEND_URL}/api/user/logout`,
         {
@@ -67,36 +65,46 @@ const Navbar = () => {
                 </li>
               </Link>
 
-              <Link to={"/dashboard"}>
-                <li>Dashboard</li>
+              {/* <p>{user?.avatar}</p> */}
+
+                <Link to={"/dashboard"}>
+               <li>Dashboard</li>
               </Link>
             </>
-          )}
+           )}
 
-              <Link to={"/profile"}>
-              <li>Profile</li>
-              </Link>
+             {user ? (
+  <>
+    <Link to={"/profile"}>
+      <li className="flex items-center gap-2">
+        <img
+          src={user.avatar}
+          alt="profile"
+          className="w-8 h-8 rounded-full object-cover"
+        />
+        {user.name}
+      </li>
+    </Link>
 
-          {!user ? (
-            <>
-              <Link to={"/login"}>
-                <li>Login</li>
-              </Link>
+    <li
+      onClick={logoutHandler}
+      className="cursor-pointer text-red-600 font-semibold"
+    >
+      Logout
+    </li>
+  </>
+) : (
+  <>
+    <Link to={"/login"}>
+      <li>Login</li>
+    </Link>
 
-              <Link to={"/sign-up"}>
-                <li>SignUp</li>
-              </Link>
-            </>
-          ) : (
-            <li
-              onClick={logoutHandler}
-              className="cursor-pointer text-red-600 font-semibold"
-            >
-              Logout
-            </li>
-          )}
-
-        </ul>
+    <Link to={"/sign-up"}>
+      <li>SignUp</li>
+    </Link>
+  </>
+)}
+</ul>
 
       </div>
     </header>

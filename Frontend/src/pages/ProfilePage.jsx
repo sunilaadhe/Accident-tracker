@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 function ProfilePage() {
   const BACKEND_URL = import.meta.env.VITE_API_URL;
@@ -9,6 +10,14 @@ function ProfilePage() {
   const [email, setEmail] = useState(user?.email || "");
   const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState(user?.avatar || "");
+
+  const [emergencyName, setEmergencyName] = useState(
+  user?.emergencyContact?.name || ""
+);
+
+const [emergencyPhone, setEmergencyPhone] = useState(
+  user?.emergencyContact?.phone || ""
+);
 
   const updateProfile = async () => {
     try {
@@ -25,6 +34,10 @@ function ProfilePage() {
             email,
             password,
             avatar,
+            emergencyContact:{
+              name:emergencyName,
+              phone:emergencyPhone,
+            }
           }),
         }
       );
@@ -38,9 +51,16 @@ function ProfilePage() {
           "user",
           JSON.stringify(data.user)
         );
+
+        toast.success(data.message)
+        setTimeout(()=>{
+          window.location.reload();
+        },1000)
+
       }
     } catch (error) {
       console.log(error);
+      toast.error("something went wrong");
     }
   };
 
@@ -91,6 +111,29 @@ function ProfilePage() {
             onChange={(e) => setPassword(e.target.value)}
             className="border p-2 w-full rounded"
           />
+          <div className="border-t pt-5 mt-5">
+
+          <h2 className="text-xl font-bold text-red-600 mb-4">
+          🚨 Emergency Contact
+         </h2>
+
+        <input
+          type="text"
+          placeholder="Emergency Contact Name"
+          value={emergencyName}
+          onChange={(e) => setEmergencyName(e.target.value)}
+          className="border p-2 w-full rounded mb-3"
+       />
+
+        <input
+           type="tel"
+           placeholder="Emergency Contact Phone"
+           value={emergencyPhone}
+           onChange={(e) => setEmergencyPhone(e.target.value)}
+           className="border p-2 w-full rounded"
+       />
+
+      </div>
 
           <button
             onClick={updateProfile}

@@ -66,76 +66,86 @@ export const SigniIn = async (req,res)=>{
 });
 }
 
-export const userUpdate = async (req,res,next)=>{
-  try{
 
-     if (req.user.id !== req.params.id){
-    return res.status(401).json({
-      success:false,
-      message:"you can update only your profile"
-    })
-  }
+
+export const userUpdate = async (req, res, next) => {
+  try {
+
+    console.log("Logged in user ID:", req.user.id);
+    console.log("URL user ID:", req.params.id);
+
+    if (req.user.id !== req.params.id) {
+      return res.status(401).json({
+        success: false,
+        message: "you can update only your profile"
+      });
+    }
 
     if (req.body.email) {
+      const userExist = await User.findOne({
+        email: req.body.email
+      });
 
-  const userExist = await User.findOne({
-    email: req.body.email
-  });
+      if (
+        userExist &&
+        userExist._id.toString() !== req.params.id
+      ) {
+        return res.status(404).json({
+          success: false,
+          message: "user email already exist"
+        });
+      }
+    }
 
-  if (
-    userExist &&
-    userExist._id.toString() !== req.params.id
-  ) {
-    return res.status(404).json({
+    if (req.body.password) {
+      req.body.password = hashSync(req.body.password, 10);
+    }
+
+    const { id } = req.params;
+
+    const updateData = {
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+      avatar: req.body.avatar
+    };
+
+
+    // Add emergency contact only when provided
+    if (req.body.emergencyContact) {
+      updateData.emergencyContact = {
+        name: req.body.emergencyContact.name || "",
+        phone: req.body.emergencyContact.phone || ""
+      };
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      {
+        $set: updateData
+      },
+      {
+        new: true
+      }
+    );
+
+    const { password, ...rest } = updatedUser._doc;
+
+    res.status(202).json({
+      success: true,
+      message: "Update user successfully",
+      user: rest
+    });
+
+  } catch (error) {
+    console.log(error);
+
+    return res.status(400).json({
       success: false,
-      message: "user email already exist"
+      message: "Error while update user"
     });
   }
-
-}
-      
-    
-
-   if(req.body.password){
-        req.body.password = hashSync(req.body.password,10);
-
-   }
- 
-   const {id} = req.params;
-   
-   const updatedUser = await User.findByIdAndUpdate(id,{
-    $set:{
-      name:req.body.name,
-      email:req.body.email,
-      password:req.body.password
-    }
-   },
-
-
-   {
-    new:true
-   }
-  );
-   
-  const {password,...rest} = updatedUser._doc;
-  
-  res.status(202).json({
-    success:true,
-    message:"Upadate user successsfully ",
-   user:rest
-  });
-
-}
-  catch(error){
-    return res.status(400).json({
-        suceess:false,
-        message:"Error while upadte user"  
-    })
-  }
-
-
-
-}
+};
 
 export const  logoutUser = (req,res,next)=>{
   try{
